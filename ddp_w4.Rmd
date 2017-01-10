@@ -19,6 +19,10 @@ This application enables users to draw interactive plots for the mtcars dataset.
 - interactive (plotly)
 - enforce selection of different columns for x and y
 
+### Application Link
+
+https://codingworks.shinyapps.io/ddp_emt/
+
 
 ## Input
 
