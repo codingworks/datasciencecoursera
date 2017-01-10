@@ -1,0 +1,57 @@
+---
+title: "Explore Motor Trend"
+author: "Rongqin Sheng"
+date: "January 10, 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Introduction
+
+This application enables users to draw interactive plots for the mtcars dataset. The data comes from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973-74 models). 
+
+### Features
+
+- 3 dimensions - x, y and color
+- interactive (plotly)
+- enforce selection of different columns for x and y
+
+
+## Input
+
+Select columns for x, y and color from 3 drop-down lists. Enforce selection of different columns for x and y.
+
+- Columns for x and y: mpg (miles per gallon), disp (displacement (cu.in.)), hp (gross horsepower), drat (rear axle ratio), wt (weight (1000 lbs)), qsec (1/4 mile time)
+
+- Columns for color: cyl (number of cylinders), vs (V/S), am (transmission), gear (number of forward gears), carb (Number of carburetors)
+
+## Output
+
+For each selection of x, y and color, an interactive scatter plot is displayed.
+
+#### Example (see a plot on the next page)
+```{r echo = TRUE, message=FALSE}
+library(plotly)
+library(RColorBrewer)
+data(mtcars)
+mtcars$am <- ifelse(mtcars$am == 0, "automatic", "manual")
+input_x <- "wt"; input_y <- "mpg"; input_color <- "am"
+x_label <- "Weight (1000 lbs)"; y_label <- "Miles per gallon"
+myplot <- plot_ly(x = mtcars[, input_x], y = mtcars[, input_y], 
+                 type = 'scatter', mode = "markers", 
+                 color = factor(mtcars[, input_color]), 
+                 colors = brewer.pal(6, "Set2"), 
+                 text = rownames(mtcars)) %>% 
+  layout(xaxis = list(title = x_label), 
+         yaxis = list(title = y_label))
+```
+
+##
+
+```{r echo = TRUE, message=FALSE, warning=FALSE}
+
+myplot
+```
